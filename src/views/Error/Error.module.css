@@ -1,0 +1,20 @@
+.container{
+  background: url(../../imgs/error2.png) center center/contain no-repeat;
+  background-color: rgba(101, 5, 166, 0.305);
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: left; */
+}
+
+.h2{
+  color: #000000;
+  background: #ffffff71;
+  text-shadow: 2px 2px 0 #bcbcbc, 4px 4px 0 #9c9c9c;
+  color: #000000;
+  /* background: #FFFFFF; */
+  font-size: 120px;
+  margin-left: 15%;
+}
