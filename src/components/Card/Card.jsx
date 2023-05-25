@@ -17,12 +17,12 @@ export default function Card(props) {
         >
           X
         </button>
-        <h3 className={`${styles.id}`}>ID:  {id} </h3>
       </div>
       <div >
         <img className={styles.imgStyle} src={image} alt="" />
       </div>
 
+        <h3 className={`${styles.id}`}>ID:  {id} </h3>
       <div className={`${styles.details}`}>
 
       <Link to={`/Detail/Detail/${id}`} >
