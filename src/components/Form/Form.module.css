@@ -1,9 +1,9 @@
 .container{
-    background: url(../../imgs/fondoRyM.png) center top/contain no-repeat;
+    background: url(../../imgs/fondoRyM.png) center center/contain no-repeat;
     height: 550px;
     display:flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
 }
   
 .main {
@@ -13,9 +13,18 @@
    flex-direction: column;
    justify-content: flex-end;
    /* align-items: flex-end; */
+   
    /* margin: 1%; */
    bottom: 10px;
 }
+.error{
+    border:2px solid red;
+}
+
+.success{
+    border:2px solid green;
+}
+
 
 .item0 {
    width: 220px;

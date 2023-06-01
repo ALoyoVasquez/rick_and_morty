@@ -7,17 +7,18 @@ import axios from "axios";
 
 //React Routing
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import About from "./views/About"
+import About from './views/About/About'
 import Detail from './views/Detail/Detail' 
 import Error from './views/Error/Error'
 import PathRoutes from "./helper/Routes.helper";
 import Form from "./components/Form/Form";
-
+import { useEffect } from "react";
+import Favorites from "./components/Favorites/Favorites";
 
 function Ubicacion(props) {
   const location = useLocation();
 
-  if (location.pathname !=='/') return ( <Nav onSearch={props.onSearch} />);  
+  if (location.pathname !=='/') return ( <Nav onSearch={props.onSearch} logOut={props.logOut} />);  
 }
 
 
@@ -27,31 +28,35 @@ function App() {
   const EMAIL='anita@mail.com';
   const PASSWORD='AL.123456';
 
-  function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-       setAccess(true);
-       navigate('/home');
-    }
+function login(userData) {
+  if (userData.password === PASSWORD && userData.email === EMAIL) {
+      setAccess(true);
+      navigate('/home');
+    }// else alert('Your email and password do not match')
  }
-//  useEffect(() => {
-//   !access && navigate('/');
-//   }, [access]);
+  useEffect(() => {
+    !access && navigate('/');
+  }, [access]);
 
+const logOut=()=> {
+  setAccess(false);
+  // navigate('/');
+}
 
-  const [characters, setCharacters] = useState([]);
+const [characters, setCharacters] = useState([]);
 
- const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {setCharacters((oldChars) => [...oldChars, data]);}
-        else { window.alert("¡No hay personajes con este ID!");}
-      });
-  };
+const onSearch = (id) => {
+  if(characters.find((char)=> char.id ===id)){
+    return alert("Personaje repetido");
+  }
 
+  axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    ({ data }) => {
+      if (data.name) {setCharacters((oldChars) => [...oldChars, data]);}
+      else { window.alert("¡No hay personajes con este ID!");}
+    });
+};
 
-  // const filter = characters.filter((char)=>{
-  //    return char.id !== Number(id) } )
-  // setCharacters(filter);
   const onClose = (id) => {
     setCharacters(
       characters.filter((char) => {
@@ -62,11 +67,10 @@ function App() {
 
   return (
     <div className={`App`}>
-      
-        <Ubicacion onSearch={onSearch} />    
+        <Ubicacion onSearch={onSearch} logOut={logOut} />    
         {/* <Nav onSearch={onSearch} />;  */}
         <Routes> 
-            <Route path={PathRoutes.FORM} element={<Form/>} />
+            <Route path={PathRoutes.FORM} element={<Form login={login} />} />
 
             <Route path={PathRoutes.HOME} element={<Cards characters={characters}
                                           onClose={onClose}
@@ -75,13 +79,14 @@ function App() {
 
             <Route path={PathRoutes.ABOUT} element={<About/>} />
 
-            <Route path={PathRoutes.DETAIL} element={<Detail/>} />
 
+            <Route path={PathRoutes.DETAIL} element={<Detail/>} />
+            
             <Route path={PathRoutes.ERROR} element={<Error/>} />
             
-            <Route path='*' element={<Navigate to={PathRoutes.ERROR} replace /> }/>
-            
+            <Route path={PathRoutes.FAVORITES} element={<Favorites/>} /> 
 
+            <Route path='*' element={<Navigate to={PathRoutes.ERROR} replace /> }/>
         </Routes>
     </div>
   );

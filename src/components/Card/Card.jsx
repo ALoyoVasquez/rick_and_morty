@@ -1,40 +1,76 @@
-import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
+import { Link } from "react-router-dom";
+import { addFav, removeFav } from "../../redux/action";
+import { useEffect, useState } from "react";
+import { connect, useDispatch } from "react-redux";
 
 
-export default function Card(props) {
-  // export default function Card(
-  const { id, name, species, gender, status, image, origin } = props;
-  const {onClose} = props;
+function Card({ id, name, species, gender, status, image, origin, onClose, addFav, removeFav, myFavorites }) {
+
+  const [isFav, setIsFav] = useState(false);
+  /**  const dispatch = useDispatch(); */
+
+  useEffect(() => {
+    myFavorites.forEach((fav) => {
+       if (fav.id === id) {
+          setIsFav(true);
+       }
+    });
+ }, [myFavorites]);
+
+// { id, name, species, gender, status, image, origin }
+  const handleFavorite = () => {
+    if (isFav) {
+      setIsFav(false);
+      removeFav(id);
+    } else {
+      setIsFav(true);
+      addFav({id, name, species, gender, status, image, onClose, addFav, removeFav});
+    }
+  };
 
   return (
+    
     <div className={`${styles.container}`}>
       <div>
-        <button className={styles.closeButton}
-          onClick={() => 
-            {onClose(id) }
-          }
-        >
-          X
-        </button>
+        <button className={styles.closeButton} onClick={() => {onClose(id);}} > X </button>
       </div>
-      <div >
+      <div>
         <img className={styles.imgStyle} src={image} alt="" />
       </div>
+      {isFav ? (
+        <button className={styles.favButton} onClick={handleFavorite}>❤️</button>
+      ) : (
+        <button className={styles.favButton} onClick={handleFavorite}>🤍</button>
+      )}
 
-        <h3 className={`${styles.id}`}>ID:  {id} </h3>
-      <div className={`${styles.details}`}>
-
-      <Link to={`/Detail/Detail/${id}`} >
-          {/* <h3 className="card-name">{name}</h3> */}
-        <h4 className={`${styles.name}`} > {name} </h4>
-      </Link>
-
-        <h4 className={`${styles.status}`}>{status.toUpperCase()}</h4>
-        <h4 className={`${styles.origin}`}> ORIGIN {origin.name}</h4>
-        <h4 className={`${styles.genero}`}>{gender.toUpperCase()}</h4>
-        <h4 className={`${styles.specie}`}>{species.toUpperCase()}</h4>
-      </div>
+      {name ? (
+        <>
+          <div className={`${styles.details}`}>
+            <Link to={`/Detail/Detail/${id}`}><h4 className={`${styles.name}`}>{name}</h4></Link>
+            <h3 className={`${styles.id}`}>ID: {id} </h3>
+            <h4 className={`${styles.status}`}>{status}</h4><br />
+            <h4 className={`${styles.specie}`}>{species}</h4><br />
+            <h4 className={`${styles.genero}`}>{gender}</h4><br />
+            <h4 className={`${styles.origin}`}>ORIGIN:{origin?.name}</h4>
+          </div> 
+        </>
+        ) : (
+            <h3>Loading...</h3>
+          )}
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFav: (character) => { dispatch(addFav(character)); },
+    removeFav: (id) => { dispatch(removeFav(id)); },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return { myFavorites : state.myFavorites, } 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

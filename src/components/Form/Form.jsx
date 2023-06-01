@@ -1,23 +1,30 @@
 import React from 'react'
-import validar from '../Validation/validation.js'
 import style from './Form.module.css'
+import validate from './validation';
 
-const Form = () => {
+const Form = (props) => {
 
   const [userData, setUserData] = React.useState({
     email:'',
     password:''
   });
 
-  const [errors, setErrors] = React.useState({});
-
-  // const handleChange =()=>{
-  //   set
-  // }
+  const [errors, setErrors] = React.useState({
+    email:'',
+    password:''
+  });
 
   const handleChange=(event)=>{
-    // setUserData
-    validar(userData.email, setErrors, errors)
+    const property = event.target.name;
+    const value = event.target.value;
+
+    setUserData({...userData, [property]:value});
+    validate({...userData, [property]:value}, errors, setErrors);
+  }
+
+  const handleSubmit=(event)=>{
+    event.preventDefault();
+    props.login(userData);
   }
 
   return (
@@ -26,12 +33,15 @@ const Form = () => {
       <div className={style.main} >
 
         <form action="" className={style.item0}>
-            <label htmlFor="name" className={style.h3}>E-MAIL</label>
-            <input type="text" name='email' value={userData.email} placeholder='Type your Email...'/>
+            <label htmlFor="email" className={style.h3}>E-MAIL </label>
+            <input type="text" name='email' onChange={handleChange}  value={userData.email} placeholder='Type your Email...'
+            className={errors.email ? style.error : style.success}
+            />
+            <p>{errors.email}</p>
             <label htmlFor="password"className={style.h3}>PASSWORD </label>
-            <input type="text" name='password' value={userData.password} placeholder='Type your password...'/>
-           {/* <br />  */}
-            <button type="submit"className={style.submit}>SUBMIT</button>
+            <input type="text" name='password' onChange={handleChange} value={userData.password} placeholder='Type your password...'/>
+            <p>{errors.password}</p>
+            <button type="submit" className={style.submit} onClick={handleSubmit}>SUBMIT</button>
         </form>
       </div> 
     </div>

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import styles from "./Detail.module.css";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import styles from "./Detail.module.css";
 
 const Detail = () => {
   const { id } = useParams();
@@ -10,7 +9,8 @@ const Detail = () => {
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    axios(`https://rickandmortyapi.com/api/character/${id}`)
+    .then(
       ({ data }) => {
         if (data.name) {
           setCharacter(data);
@@ -24,17 +24,28 @@ const Detail = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.container2}>
-      <h2 className={styles.h2}> {character.name} </h2>
-        {/* <h3>NAME:  </h3> */}
-        <h3>STATUS: {character.status} </h3>
-        <h3>SPECIE: {character.species} </h3>
-        <h3>GENDER: {character.gender} </h3>
-        <h3>ORIGIN: {character.origin} </h3>
+      <div className={`${styles.container2}`}></div>
+      <div className={`${styles.container2}`}></div>
+      <div className={`${styles.container2}`}>
+        <div className={`${styles.label}`}>
+          {character.name ? (
+            <>
+              <h2>{character.name} </h2>
+              STATUS: <span className={styles.text}>{character.status}</span><br />
+              SPECIE: <span className={styles.text}> {character.species}</span><br />
+              GENDER: <span className={styles.text}> {character.gender} </span><br />
+              ORIGIN: <span className={styles.text}>{character.origin?.name}</span>
+            </>
+          ) : (
+            <h3>Loading...</h3>
+          )}
+        </div>
       </div>
-      <div >
+      <div className={styles.container2}>
         <img className={styles.img} src={character.image} alt="" />
       </div>
+      <div className={`${styles.container2}`}></div>
+      <div className={`${styles.container2}`}></div>
       {/* <img  </h3> */}
     </div>
   );
