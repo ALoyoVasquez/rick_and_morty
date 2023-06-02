@@ -1,30 +1,44 @@
 import Card from "../Card/Card";
-import { useSelector } from "react-redux";
 import style from './Favorites.module.css'
-// import { connect, useDispatch } from "react-redux";
-// import { filterCards, orderCards } from "../../redux/action";
-// import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { filterCards, orderCards } from "../../redux/action";
+import { useState } from "react";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.myFavorites);
-  // console.log(state);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [aux, setAux] = useState(false);
 
-  // const [aux, setAux] = useState(false);
+  const handleOrder = (e)=>{
+    dispatch(orderCards(e.target.value));
+    if(aux) setAux(true)
+    else setAux(false)
+  }
 
-  // const handleOrder = (e)=>{
-  //   dispatch(orderCards(e.target.value));
-  //   if(aux) setAux(true)
-  //   else setAux(false)
-  // }
-  // const handleFilter = (e)=>{
-  //   dispatch(filterCards(e.target.value));
-  // }
+  const handleFilter = (e)=>{
+    dispatch(filterCards(e.target.value));
+  }
 
   return (
     <>
     <div className={style.container}>
-
+      <div className={style.nav}>
+      <label  for="select">Orden: </label>
+      <select onChange={handleOrder}>
+        <option value='A'>Ascendente</option>
+        <option value='D'>Descendente</option>
+      </select>
+      <label  for="select" >  Gender: </label>
+        <select onChange={handleFilter} >
+          <option value=''>All</option>
+          <option value='Male'>Male</option>
+          <option value='Female'>Female</option>
+          <option value='Genderless'>Genderless</option>
+          <option value='unknown'>unknown</option>
+        </select>
+      </div>
+      <div className={style.container2}>
       { favorites.map(({ id, name, species, gender,  status, image, origin }) => {
         return (
           <Card
@@ -39,28 +53,12 @@ const Favorites = () => {
           />
           );
         })}
+
+        </div>
         </div>
     </>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return { myFavorites: state.myFavorites };
-// };
 
 export default Favorites;
-
-    // <div className={style.container}>
-    // <label  for="select">Orden:</label>
-    //   <select id="orden" onChange={handleOrder}>
-    //     <option label="Ascendente" value='Ascendente'>Ascendente</option>
-    //     <option label="Descendente" value='Descendente'>Descendente</option>
-    //   </select>
-    // <label  for="select" onChange={handleFilter} >Gender:</label>
-    //   <select id="gender">
-    //     <option label="Male" value='Male'>Male</option>
-    //     <option label="Female" value='Female'>Female</option>
-    //     <option label="Genderless" value='Genderless'>Genderless</option>
-    //     <option label="unknown" value='unknown'>unknown</option>
-    //   </select>
-    // </div>

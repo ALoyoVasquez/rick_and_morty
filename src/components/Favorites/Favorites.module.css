@@ -1,5 +1,16 @@
 .container {
-    /* background-color: rgba(0, 255, 255, 0.421); */
+    /* background-color: rgba(0, 255, 8, 0.421); */
+    /* margin: 2px 2px 2px 2px; */
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    align-items:stretch;
+  }
+
+  .container2{
+    /* background-color: rgba(255, 0, 34, 0.421); */
     /* margin: 2px 2px 2px 2px; */
     display: flex;
     flex-wrap: wrap;
@@ -7,3 +18,8 @@
     padding: 10px;
     align-items:stretch;
   }
+
+.nav{
+  background-color: rgba(255, 0, 174, 0.568);
+  color: white;
+}
