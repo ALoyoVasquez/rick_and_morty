@@ -46,12 +46,14 @@ const logOut=()=> {
 const [characters, setCharacters] = useState([]);
 
 const onSearch = (id) => {
-  if(characters.find((char)=> char.id ===id)){
-    return alert("Personaje repetido");
+  if(characters.find((char)=> char.id == id)){
+    return swal ( "Oops" ,  "Something went wrong!" ,  "error" ) ;
+    // alert("Personaje repetido");
   }
 
-  axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-    ({ data }) => {
+  // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+  axios(`http://localhost:3001/rickandmorty/character/${id}`)
+  .then(({ data }) => {
       if (data.name) {setCharacters((oldChars) => [...oldChars, data]);}
       else { window.alert("¡No hay personajes con este ID!");}
     });
