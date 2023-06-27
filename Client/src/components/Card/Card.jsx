@@ -1,8 +1,8 @@
-import styles from "./Card.module.css";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/action";
-import { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import styles from "./Card.module.css";
 
 
 function Card({ id, name, species, gender, status, image, origin, onClose, addFav, removeFav, myFavorites }) {

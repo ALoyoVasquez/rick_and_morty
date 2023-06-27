@@ -1,5 +1,5 @@
-import React from 'react'
-import style from './Form.module.css'
+import React from 'react';
+import style from './Form.module.css';
 import validate from './validation';
 
 const Form = (props) => {
@@ -39,7 +39,9 @@ const Form = (props) => {
             />
             <p>{errors.email}</p>
             <label htmlFor="password"className={style.h3}>PASSWORD </label>
-            <input type="text" name='password' onChange={handleChange} value={userData.password} placeholder='Type your password...'/>
+            <input type="text" name='password' onChange={handleChange} value={userData.password} placeholder='Type your password...'
+            className={errors.password ? style.error : style.success}
+            />
             <p>{errors.password}</p>
             <button type="submit" className={style.submit} onClick={handleSubmit}>SUBMIT</button>
         </form>

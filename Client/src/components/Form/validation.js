@@ -1,32 +1,33 @@
+const validate = (userData, errors, setErrors) => {
 
-const validate = (userData, errors, setErrors)=> {
+  if (!userData.email)
+    setErrors({ ...errors, email: "Por favor completa este campo." });
 
-    if(!userData.email)
-        setErrors({...errors, email:"Por favor completa este campo."})
-    else if(userData.email.length > 35 )
-            setErrors({...errors, email:"El UserName debe ser máximo de 35 caracteres"})
-    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.email))
-            setErrors({...errors, email:"You have entered an invalid email address!"})
-    else if(!userData.password) setErrors({...errors, password:"Password empty"})
-    else if (!/\d/.test(userData.password)) setErrors({...errors, password:"La contraseña debe contener al menos 1 número."})
-    else if(userData.password.length > 10 || userData.password.length < 6 )
-    setErrors({...errors, password:"La contraseña tiene que tener una longitud entre 6 y 10 caracteres."})
-    else 
-    {setErrors({...errors, password:''});
-    setErrors({...errors, email:""});
+  else if (userData.email.length > 35)
+        setErrors({...errors, email: "El UserName debe ser máximo de 35 caracteres"});
 
-}
-}
+  else if ( !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.email))
+        setErrors({...errors, email: "You have entered an invalid email address!"});
 
+  else if (!userData.password)
+        setErrors({ ...errors, password: "Password empty" });
 
+  else if (!/\d/.test(userData.password))
+        setErrors({...errors, password: "La contraseña debe contener al menos 1 número."});
+
+  else if (userData.password.length > 10 || userData.password.length < 6)
+        setErrors({...errors, password: "La contraseña tiene que tener una longitud entre 6 y 10 caracteres."});
+
+  else {
+    setErrors({ ...errors, email: "", password: "" });
+  }
+};
 
 export default validate;
 // module.exports={
 //     validate,
 //     // validaPassword
 // }
-
-
 
 // let errors={};
 
@@ -38,10 +39,10 @@ export default validate;
 
 //     if(!data.email)
 //         errors.e2 = 'Ingresa un email.'
-    
+
 //     if(data.email.length > 35)
 //         errors.e3 = 'El email debe tener menos de 35 caracteres.'
-    
+
 //     if(!/.*\d+.*/.test(data.password))
 //         errors.p1 = "La password debe tener al menos 1 numero"
 
