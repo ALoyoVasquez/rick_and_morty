@@ -1,12 +1,90 @@
-.h2 {
-    color: white;
+.container1{
+    /* color: aqua; */
+    /* background-color: rgba(255, 255, 255, 0.212); */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 5px;
+    /* align-items: stretch; */
+    /* align-content: stretch; */
 }
 
-.h3{
-    color: white;
-    background-color: rgba(0, 255, 255, 0.387);
+.containerImg{
+    margin: 5px;
+    background-color: rgba(163, 12, 155, 0.61);
+    width: 450px;
+    height: 550px;
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .containerExpl{
-    background-color: rgba(255, 255, 255, 0.204);
+    margin: 5px;
+    background-color: rgb(255, 255, 255);
+    width: 450px;
+    height: 550px;
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
+
+.h2 {
+    color: rgb(102, 5, 166);
+    text-align: left;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 40px;
+    letter-spacing: -0.2px;
+    word-spacing: -0.4px;
+    /* color: #000000; */
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+    margin: 10px;
+}
+
+.h5{
+    text-align: left;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    margin: 5px;
+}
+
+.p{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 20px;
+}
+

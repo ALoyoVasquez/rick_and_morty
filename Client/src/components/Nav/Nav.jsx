@@ -18,9 +18,8 @@ return (
             <Link to="/views/About/about" className={style.link}>About</Link>
             {/* <h3> Bienvenido , </h3> */}
             <Link to="/favorites" className={style.link}>Favorites</Link>
-            <Link to="/" className={style.link} params={ logOut }>LogOut</Link>
+            <Link to="/" className={style.link} params={ logOut }>Log_Out</Link>
             <SearchBar onSearch={onSearch} />
         </nav>
-   
    );
 }

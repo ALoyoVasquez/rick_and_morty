@@ -16,11 +16,11 @@ export default function SearchBar(props) {
             onSearch(id);
          } }
          >
-            Agregar
+            Add
          </button>
          <button className={style.button} onClick={()=>{
             onSearch(`${Math.floor(Math.random() * (826 - 1 + 1) + 1)}`);
-         } }>Random</button>
+         } }>Rand</button>
       </div>
    );
 }

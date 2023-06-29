@@ -1,23 +1,26 @@
-import React from 'react'
-import styles from './About.module.css'
+import React from "react";
+import styles from "./About.module.css";
 
 const About = () => {
   return (
-    <div>
-      About
-        <h1 className={styles.h2}>About</h1>
-        <h2 className={styles.h3}>AMLV</h2>
-        <h3 className={styles.h3}>Proyecto de Integracion AMLV</h3>
-        <div className={styles.containerExpl}>
-          <p>En este proyecto estoy aplicando parte los conocimientos que hemos adquirido en SoyHenry. </p>
-          <p> - Aplique React </p> 
-          <p> - Aplique Redux </p> 
-          <p> - Aplique Css para los Estilos </p> 
-        </div>
-        
+    <div className={styles.container1}>
+      <div className={styles.containerImg}>IMAGEN</div>
 
+      <div className={styles.containerExpl}>
+        <h5 className={styles.h5}>ANA MARIA LOYO VASQUEZ</h5>
+        <h1 className={styles.h2}>About Me</h1>
+        <h3 className={styles.h5}>Proyecto de Integracion AMLV</h3>
+        <hr />
+        <p className={styles.p}>
+          En este proyecto estoy aplicando parte los conocimientos que hemos
+          adquirido en SoyHenry.{" "}
+        </p>
+        <p className={styles.p}> - Aplique React </p>
+        <p className={styles.p}>  - Aplique Redux </p>
+        <p className={styles.p}>  - Aplique Css para los Estilos </p>
+      </div>
     </div>
   );
-}
+};
 
 export default About;

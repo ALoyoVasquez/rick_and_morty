@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./action";
+import { ADD_FAV, REMOVE_FAV, GET_FAV, FILTER, ORDER } from "./action";
 
 const initialState = {
   myFavorites: [],
@@ -35,6 +35,11 @@ const rootReducer = (state = initialState, action) => {
           return action.payload === 'A' ? a.id - b.id : b.id - a.id
       });
       return {...state, myFavorites: copy4  }
+
+  case GET_FAV :
+    return{
+      ...state, myFavorites: action.payload, allCharacters: action.payload
+    }
 
     default:
         return {...state};

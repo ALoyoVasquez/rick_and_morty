@@ -36,14 +36,21 @@ function App() {
   // const EMAIL = "anita@mail.com";
   // const PASSWORD = "AL.123456";
 
-  function login(userData) {
+  async function login(userData) {
     const { email, password } = userData;
     const URL = "http://localhost:3001/rickandmorty/login/";
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-      const { access } = data;
-      setAccess(data);
+
+    let response = await axios(URL + `?email=${email}&password=${password}`);
+
+    try {
+      const { access } = response.data;
+      setAccess(response);
       access && navigate("/home");
-    }).catch(error => alert('Your email and password do not match'));
+    } catch (error) {
+      swal("Login error", "Credenciales Inválidos!", "error");
+      console.log({ error: error.message });
+    }
+    // .then(({ data }) => { });
   }
 
   useEffect(() => {
@@ -57,23 +64,30 @@ function App() {
 
   const [characters, setCharacters] = useState([]);
 
-  const onSearch = (id) => {
+  const onSearch = async (id) => {
     if (characters.find((char) => char.id == id)) {
       return swal("Lo siento", "Personaje Repetido!", "error");
       // alert("Personaje repetido");
     }
 
     // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          swal("Lo siento", "¡No hay personajes con este ID!", "error");
-          // window.alert("¡No hay personajes con este ID!");
-        }
-      }
+    const response = await axios(
+      `http://localhost:3001/rickandmorty/character/${id}`
     );
+    const data = response.data;
+    // console.log(`data: ${data} `)
+    try {
+      // .then(({ data }) => {
+      if (data.name) {
+        setCharacters((oldChars) => [...oldChars, data]);
+      } else {
+        swal("Lo siento", "¡No hay personajes con este ID!", "error");
+        // window.alert("¡No hay personajes con este ID!");
+      }
+    } catch (error) {
+      swal("Lo siento", "¡Hubo un Error!", "error");
+      // console.log({error: error.message})
+    }
   };
 
   const onClose = (id) => {
