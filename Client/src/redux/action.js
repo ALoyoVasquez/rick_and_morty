@@ -41,7 +41,7 @@ export const removeFav = (id) => {
       const { data } = await axios.delete(endpoint);
       // .then(({ data }) => {
       return dispatch({
-        type: "REMOVE_FAV",
+        type: REMOVE_FAV,
         payload: data,
       });
     } catch (error) {

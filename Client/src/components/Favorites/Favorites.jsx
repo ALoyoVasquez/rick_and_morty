@@ -1,9 +1,9 @@
 import Card from "../Card/Card";
 import style from './Favorites.module.css'
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+// import { } from "react-redux";
 import { filterCards, orderCards } from "../../redux/action";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.myFavorites);
@@ -18,7 +18,12 @@ const Favorites = () => {
 
   const handleFilter = (e)=>{
     dispatch(filterCards(e.target.value));
+    if(aux) setAux(true)
+    else setAux(false)
   }
+  // const handleFilter = useCallback((e) => {
+  //   dispatch(filterCards(e.target.value));
+  // }, [dispatch, filterCards]);
 
   return (
     <>
